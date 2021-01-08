@@ -1,0 +1,7 @@
+## Interface: 90002 
+## Title: PugScanner
+## Notes: Scans your group and gives a copyable string.
+## Author: Prime
+## Version: 0.0.1
+
+PugScanner.lua
