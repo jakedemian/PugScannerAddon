@@ -95,7 +95,9 @@ end
 local function PugScannerHandler()
     outputString = ""
 
+    -- get people in your party
     if IsInGroup() then
+        outputString = outputString .. "_group:";
         groupType = ""
         if IsInRaid() then
             groupType = "raid"
@@ -119,9 +121,31 @@ local function PugScannerHandler()
         if (groupType == "party") then
             outputString = outputString .. GetUnitName("player") .. "-" .. GetRealmName();
         end
+        outputString = outputString .. "\n";
     else 
+        outputString = outputString .. "_group:";
         unitName = GetUnitName("player") .. "-" .. GetRealmName();
         outputString = unitName;
+        outputString = outputString .. "\n";
+    end
+
+    -- get group finder applicant results
+    local applicants = C_LFGList.GetApplicants();
+    if #applicants > 0 then
+        outputString = outputString .. "_applicants:";
+        for i=1, #applicants do
+            local applicantInfo = C_LFGList.GetApplicantInfo(applicants[i]);
+            for j=1, applicantInfo.numMembers do
+                local memberName = C_LFGList.GetApplicantMemberInfo(applicants[i], j)
+                if(not string.find(memberName, "-")) then
+                    memberName = memberName .. "-" .. GetRealmName();
+                end
+
+                outputString = outputString .. memberName .. ";"
+            end
+        end
+
+        outputString = outputString .. "\n";
     end
     
     KethoEditBox_Show(outputString)
