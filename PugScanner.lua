@@ -131,7 +131,7 @@ local function PugScannerHandler()
 
     -- get group finder applicant results
     local applicants = C_LFGList.GetApplicants();
-    if #applicants > 0 then
+    if applicants ~= nil then
         outputString = outputString .. "_applicants:";
         for i=1, #applicants do
             local applicantInfo = C_LFGList.GetApplicantInfo(applicants[i]);
