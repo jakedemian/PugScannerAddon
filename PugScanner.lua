@@ -123,7 +123,6 @@ local function PugScannerHandler()
         end
         outputString = outputString .. "\n";
     else 
-        message("test")
         outputString = outputString .. "_group:";
         unitName = GetUnitName("player") .. "-" .. GetRealmName();
         outputString = outputString .. unitName;
